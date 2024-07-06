@@ -37,9 +37,13 @@
                     ctx.fillRect(this.x, this.y, this.width, this.height);
                 }
             }
+
+            var target = [1, 0];
             
-            class Block {
-                constructor(width, height, color) {
+            class Movable {
+                constructor(x, y, width, height, color) {
+                    this.x = x;
+                    this.y = y;
                     this.width = width;
                     this.height = height;
                     this.color = color;
@@ -49,15 +53,29 @@
                     ctx.fillRect(this.x, this.y, this.width, this.height);
                 }
             }
+            
+            player = new Movable(0, 0, 16, 16, "blue");
+            class Block {
+                constructor(width, height, color, is_interactable) {
+                    this.width = width;
+                    this.height = height;
+                    this.color = color;
+                }
+                draw () {
+                    ctx.fillStyle = this.color;
+                    ctx.fillRect(this.x, this.y, this.width, this.height);
+                }
+            }
 
-            var dirt = new Block(16, 16, "brown");
-            var grass = new Block(16, 16, "green");
-            var water = new Block(16, 16, "blue");
-            var enemy = new Block(16, 16, "red");
-            var farmland = new Block(16, 16, "burlywood");
+            var dirt = new Block(16, 16, "brown", true);
+            var grass = new Block(16, 16, "green", true);
+            var water = new Block(16, 16, "blue", true);
+            var enemy = new Block(16, 16, "red", true);
+            var farmland = new Block(16, 16, "burlywood", false);
+            var chest = new Block(16, 16, "darkgoldenrod", true);
 
             class ImageBlock {
-                constructor(width, height, image) {
+                constructor(width, height, image, breaks, is_interactable = false, durability = Infinity) {
                     this.width = width;
                     this.height = height;
                     this.image = image;
@@ -67,7 +85,12 @@
                 }
             }
 
-            var pickaxe 
+            var axe = new ImageBlock(16, 16, "./axe.png", true, durability = 100);
+            var sword = new ImageBlock(16, 16, "./sword.png", true, durability = 100);
+            var shovel = new ImageBlock(16, 16, "./shovel.png", true, durability = 25);
+            var tree = new ImageBlock(16, 16, "./tree.png", true, true, durability = 2);
+
+            items = [dirt, grass, water, enemy, farmland, chest, axe, sword, shovel, tree, player];
 
             document.addEventListener("keydown", (event) => {
                 if (event.key === "i") {
