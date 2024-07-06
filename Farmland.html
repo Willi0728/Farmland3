@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport">
+        <title>Farmland Online V1.0</title>
+    </head>
+    <body style="width: 100%; height: 100vh;">
+        <script>
+            const SCALE = 4;
+            alert("Farmland Online V1.0");
+            alert("Developed by William");
+            alert("How to play:"); 
+            alert("1. Use WASD to move");
+            alert("2. Press Space to jump");
+            alert("3. Press I to interact");
+            alert("4. Left click to place blocks");
+            alert("5. Hold left click to destroy blocks");
+
+            var canvas = document.createElement("canvas");
+            canvas.style.border = "none";
+            canvas.style.margin = "0";
+            canvas.style.padding = "0";
+            canvas.width = document.body.clientWidth;
+            canvas.height = document.body.clientHeight;
+            document.body.appendChild(canvas);
+            var ctx = canvas.getContext("2d");
+
+            var player = {
+                x: 0,
+                y: 0,
+                width: 16,
+                height: 16,
+                color: "blue",
+                draw: function () {
+                    ctx.fillStyle = this.color;
+                    ctx.fillRect(this.x, this.y, this.width, this.height);
+                }
+            }
+            
+            class Block {
+                constructor(width, height, color) {
+                    this.width = width;
+                    this.height = height;
+                    this.color = color;
+                }
+                draw() {
+                    ctx.fillStyle = this.color;
+                    ctx.fillRect(this.x, this.y, this.width, this.height);
+                }
+            }
+
+            var dirt = new Block(16, 16, "brown");
+            var grass = new Block(16, 16, "green");
+            var water = new Block(16, 16, "blue");
+            var enemy = new Block(16, 16, "red");
+            var farmland = new Block(16, 16, "burlywood");
+
+            class ImageBlock {
+                constructor(width, height, image) {
+                    this.width = width;
+                    this.height = height;
+                    this.image = image;
+                }
+                draw(x, y) {
+                    ctx.drawImage(this.image, x, y, this.width, this.height);
+                }
+            }
+
+            var pickaxe 
+
+            document.addEventListener("keydown", (event) => {
+                if (event.key === "i") {
+                    // TODO interaction
+                    alert("Interact");
+                } else if (event.key == " ") {
+                    // TODO jump
+                    alert("Jump");
+                } else if (event.key == "w" || event.key == "ArrowUp") {
+                    // TODO move forward
+                    alert("Move forward");
+                } else if (event.key == "a" || event.key == "ArrowLeft") {
+                    // TODO move left
+                    alert("Move left");
+                } else if (event.key == "s" || event.key == "ArrowDown") {
+                    // TODO move backward
+                    alert("Move backward");
+                } else if (event.key == "d" || event.key == "ArrowRight") {
+                    // TODO move right
+                    alert("Move right");
+                }
+            });
+            canvas.addEventListener("mousedown", (event) => {
+                if (event.button == 0) {
+                    // TODO left click
+                    alert("Left click");
+                } else if (event.button == 1) {
+                    // TODO middle click
+                    alert("Middle click");
+                } else if (event.button == 2) {
+                    // TODO right click
+                    alert("Right click");
+                }
+            });
+            // SECTION LOOP //
+            function loop() {
+                ctx.fillStyle = "lightblue";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                //draw 
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                requestAnimationFrame(loop);
+            }
+        </script>
+    </body>
+</html>
